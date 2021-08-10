@@ -1,0 +1,4 @@
+*.bat
+*.lock
+config/precious.rb
+db/*.db
