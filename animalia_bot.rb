@@ -16,6 +16,7 @@ require './lib/mods/main'
 require './app/factorys/animal_factory'
 require './app/factorys/player_factory'
 require './app/factorys/village_factory'
+require './app/views/animal_view'
 
 class AnimaliaBot
 	include Schema
