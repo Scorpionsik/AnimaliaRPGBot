@@ -43,7 +43,7 @@ class AnimaliaBot
 				result
 			end
 			
-			def roll_attributes_from(animal)
+			def roll_attributes_for(animal)
 				attribute_hash = animal.get_attribute_params
 				RpgAttribute.create(animal_id: animal.id,
 				strength: rand(attribute_hash[:strength]),
@@ -61,7 +61,7 @@ class AnimaliaBot
 				:animals_type_values,
 				:max_animals_for_player,
 				:add_animal_by,
-				:roll_attributes_from
+				:roll_attributes_for
 			)
 		end
 	end
