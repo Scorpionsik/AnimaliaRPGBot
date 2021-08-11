@@ -1,5 +1,3 @@
-require './app/models/animals/animal'
-
 class AnimaliaBot
 	module Listener
 		module AnimalFactory
@@ -30,11 +28,11 @@ class AnimaliaBot
 			
 			def add_animal_by(key)
 				result = false
-				if Animal.where(village_id: Listener.village.id, player_id: Listener.player.id).size <= self.max_animals_for_player
-					animal = Object.const_get(key).new(village_id: Listener.village.id, player_id: Listener.player.id)
+				if Listener.player.animals.size <= self.max_animals_for_player
+					animal = Object.const_get(key).new(village_id: Listener.village.id)
+					Listener.player.animals << animal
 					animal.save
 					Listener.player.update(select_animal: animal.id) if Listener.player.select_animal.nil?
-					puts "#{animal.id} - #{Listener.player.select_animal}" #TODO remove it
 					result = true
 				end
 				result
