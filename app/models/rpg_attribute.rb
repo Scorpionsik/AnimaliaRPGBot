@@ -1,0 +1,6 @@
+require 'active_record'
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/bot.db')
+
+class RpgAttribute < ActiveRecord::Base
+	belongs_to :player
+end

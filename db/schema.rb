@@ -40,6 +40,34 @@ module Schema
 			false
 		end
 		
+		def rpg_attributes
+			Schema.db.execute <<-SQL
+			CREATE TABLE IF NOT EXISTS rpg_attributes(
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				animal_id INTEGER NOT NULL,
+				strength INTEGER,
+				strength_boost INTEGER DEFAULT 0,
+				dexterity INTEGER,
+				dexterity_boost INTEGER DEFAULT 0,
+				constitution INTEGER,
+				constitution_boost INTEGER DEFAULT 0,
+				intelligence INTEGER,
+				intelligence_boost INTEGER DEFAULT 0,
+				charisma INTEGER,
+				charisma_boost INTEGER DEFAULT 0,
+				luck INTEGER,
+				luck_boost INTEGER DEFAULT 0,
+				created_at datetime(6),
+				updated_at datetime(6),
+				CONSTRAINT fk_animals FOREIGN KEY (animal_id)
+				REFERENCES animals (id) 
+			);
+			SQL
+			true
+		rescue SQLite3::SQLException
+			false
+		end
+		
 		def players
 			Schema.db.execute <<-SQL
 			CREATE TABLE IF NOT EXISTS players(
@@ -84,16 +112,19 @@ module Schema
 			:players,
 			:animals,
 			:rpg_classes,
-			:villages
+			:villages,
+			:rpg_attributes
 		)
 	end
 	
 	def setup
 		self.db = SQLite3::Database.open 'db/bot.db'
-		Create.villages unless get_table('villages')
+		
 		Create.players unless get_table('players')
 		Create.animals unless get_table('animals')
 		Create.rpg_classes unless get_table('rpg_classes')
+		Create.villages unless get_table('villages')
+		Create.rpg_attributes unless get_table('rpg_attributes')
 	end
 	
 	def get_table(table_name)
