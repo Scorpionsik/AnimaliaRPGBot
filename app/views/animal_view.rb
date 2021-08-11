@@ -2,9 +2,13 @@ class AnimaliaBot
 	module Listener
 		module View
 			module AnimalView
+				def get_name(animal)
+					select_animal.name.nil? ? "*без имени*" : "\"#{select_animal.name}\""
+				end
+			
 				def index
 					select_animal = Listener.player.get_select_animal
-					animal_view = "<u>#{select_animal.type_value} " + (select_animal.name.nil? ? "*без имени*" : "\"#{select_animal.name}\"") + "</u>\n\n"
+					animal_view = "<u>#{select_animal.type_value} " + self.get_name(select_animal) + "</u>\n\n"
 					animal_view += "<b>Класс:</b> в разработке"
 					
 					keyboard = nil
@@ -19,7 +23,8 @@ class AnimaliaBot
 					[animal_view, keyboard]
 				end
 				module_function(
-					:index
+					:index,
+					:get_name
 				)
 			end
 		end

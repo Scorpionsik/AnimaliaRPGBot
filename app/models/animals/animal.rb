@@ -13,4 +13,8 @@ class Animal < ActiveRecord::Base
 	def type_value
 		self.class.type_value
 	end
+	
+	def pet
+		"#{self.class.type_value} ластится и тянется к вашей ласковой руке!"
+	end
 end
