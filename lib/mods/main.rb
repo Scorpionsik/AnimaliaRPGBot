@@ -7,6 +7,8 @@ class AnimaliaBot
 				def standart_message(message)
 					text = message.text.downcase
 					if(text.include?("мои звери"))
+						select_animal = Listener.player.get_select_animal
+						Listener::AnimalFactory.roll_attributes_from select_animal if select_animal.rpg_attribute.nil? #TODO refactor this or delete
 						Mode.show_view Listener::View::AnimalView.index
 					elsif(text.include?("дать имя"))
 						animal = Listener.player.get_select_animal
@@ -25,8 +27,12 @@ class AnimaliaBot
 				def callback_message(message, callback)
 					if callback.include? "animal"
 						animal_id = callback.match(/\d+$/).to_s.to_i
-						Listener.player.update(select_animal: animal_id) if Listener.player.animals.find_by(id: animal_id)
-						Mode.show_view Listener::View::AnimalView.index
+						if Listener.player.animals.find_by(id: animal_id)
+							Listener.player.update(select_animal: animal_id) 
+							select_animal = Listener.player.get_select_animal #TODO refactor this or delete
+							Listener::AnimalFactory.roll_attributes_from select_animal if select_animal.rpg_attribute.nil? #TODO refactor this or delete
+							Mode.update_view(message, Listener::View::AnimalView.index)
+						end
 					else
 						self.empty_message(callback)
 					end
