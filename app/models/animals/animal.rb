@@ -8,10 +8,6 @@ class Animal < ActiveRecord::Base
 	has_one :rpg_class
 	has_one :rpg_attribute
 	
-	def initialize
-		Listener::AnimalFactory.roll_attributes_from self if self.rpg_attribute.nil?
-	end
-	
 	def self.type_value
 		""
 	end
