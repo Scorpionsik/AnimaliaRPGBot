@@ -30,17 +30,19 @@ class AnimaliaBot
 			end
 			
 			def add_animal_by(key)
-				result = false
 				if Listener.player.animals.size <= self.max_animals_for_player
-					animal = Object.const_get(key).new(village_id: Listener.village.id)
-					Listener.player.animals << animal
-					roll_attributes_for animal if animal.rpg_attribute.nil?
-					animal.save
-					Listener.player.update(select_animal: animal.id) if Listener.player.select_animal.nil?
-					
-					result = true
+					animal = Object.const_get(key).create(player_id: Listener.player.id, village_id: Listener.village.id)
+					unless animal.nil?
+						Listener.player.animals << animal
+						roll_attributes_for animal if animal.rpg_attribute.nil?
+						Listener.player.update(select_animal: animal.id) if (Listener.player.select_animal.nil?)
+						true
+					else 
+						false
+					end
 				end
-				result
+			rescue NameError
+				false
 			end
 			
 			def roll_attributes_for(animal)

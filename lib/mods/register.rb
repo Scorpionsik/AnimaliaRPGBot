@@ -31,6 +31,8 @@ class AnimaliaBot
 						if is_success
 							self.success_reg_message
 							self.change_mod
+						else
+							Listener::Response.std_message "Похоже, сейчас таких зверят в лесу нет, попробуйте выбрать другого."
 						end
 					end
 				end
