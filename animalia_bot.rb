@@ -17,6 +17,15 @@ require './app/factorys/animal_factory'
 require './app/factorys/player_factory'
 require './app/factorys/village_factory'
 require './app/views/animal_view'
+require './app/models/animals/bear'
+require './app/models/animals/beaver'
+require './app/models/animals/deer'
+require './app/models/animals/fox'
+require './app/models/animals/nightingale'
+require './app/models/animals/owl'
+require './app/models/animals/raccoon'
+require './app/models/animals/raven'
+require './app/models/animals/squirrel'
 
 class AnimaliaBot
 	include Schema

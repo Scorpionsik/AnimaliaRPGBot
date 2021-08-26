@@ -10,10 +10,13 @@ class AnimaliaBot
 		
 			def animals_collection
 			[
+				'Bear',
 				'Beaver',
 				'Deer',
 				'Fox',
+				'Nightingale',
 				'Owl',
+				'Raccoon',
 				'Raven',
 				'Squirrel',
 			]

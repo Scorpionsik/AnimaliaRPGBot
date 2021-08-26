@@ -1,10 +1,3 @@
-require './app/models/animals/beaver'
-require './app/models/animals/deer'
-require './app/models/animals/fox'
-require './app/models/animals/owl'
-require './app/models/animals/raven'
-require './app/models/animals/squirrel'
-
 class AnimaliaBot
 	module Listener
 		module CallbackMessages
